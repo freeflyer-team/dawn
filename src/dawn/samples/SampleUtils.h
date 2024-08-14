@@ -33,6 +33,7 @@
 #endif  // __EMSCRIPTEN__
 
 #include <webgpu/webgpu_cpp.h>
+#include <vector>
 
 bool InitSample(int argc, const char** argv);
 
@@ -44,6 +45,7 @@ class SampleBase {
     static int Run(unsigned int delay);
 
   protected:
+    virtual std::vector<wgpu::FeatureName> GetRequiredFeatures(){ return std::vector<wgpu::FeatureName>(); }
     virtual bool SetupImpl() = 0;
     virtual void FrameImpl() = 0;
 

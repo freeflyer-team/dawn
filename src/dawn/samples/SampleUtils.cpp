@@ -193,6 +193,12 @@ int SampleBase::Run(unsigned int delay) {
 
     // Set device callbacks
     wgpu::DeviceDescriptor deviceDesc = {};
+
+    auto requiredFeatures = sample->GetRequiredFeatures();
+
+    deviceDesc.requiredFeatures = requiredFeatures.data();
+    deviceDesc.requiredFeatureCount = requiredFeatures.size();
+
     deviceDesc.SetDeviceLostCallback(
         wgpu::CallbackMode::AllowSpontaneous,
         [](const wgpu::Device&, wgpu::DeviceLostReason reason, const char* message) {
